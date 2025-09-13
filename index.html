@@ -1,46 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Payroll Management</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- External CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pay Role Management</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Payroll Management</h1>
+  <main class="container">
+    <h1>Pay Role Management</h1>
 
-    <div class="form-group">
-      <label for="billAmount">Bill Amount (₹):</label>
-      <input type="number" id="billAmount" placeholder="Enter bill amount" required />
-    </div>
+    <section class="card">
+      <h2>Enter Bill & Paid Amount</h2>
 
-    <div class="form-group">
-      <label for="paidAmount">Paid Amount (₹):</label>
-      <input type="number" id="paidAmount" placeholder="Enter paid amount" required />
-    </div>
+      <form id="payForm" novalidate>
+        <label>
+          Bill Amount
+          <input type="number" id="billAmount" placeholder="e.g. 500" min="0" step="1" required />
+        </label>
 
-    <button onclick="calculateChange()">Calculate Change</button>
+        <label>
+          Paid Amount
+          <input type="number" id="paidAmount" placeholder="e.g. 2000" min="0" step="1" required />
+        </label>
 
-    <div id="message" class="message"></div>
+        <div class="row">
+          <button type="submit" id="calculateBtn">Calculate Change</button>
+          <button type="button" id="resetBtn" class="alt">Reset</button>
+        </div>
+      </form>
 
-    <table id="resultTable" style="display: none;">
-      <thead>
-        <tr>
-          <th>Note Denomination (₹)</th>
-          <th>Number of Notes</th>
-        </tr>
-      </thead>
-      <tbody id="tableBody"></tbody>
-    </table>
-  </div>
+      <div id="message" class="message" aria-live="polite"></div>
+    </section>
 
-  <!-- External JS -->
+    <section class="card results" id="resultsSection" hidden>
+      <h2>Change Summary</h2>
+      <p id="changeInfo"></p>
+
+      <table id="notesTable" aria-label="Notes to return">
+        <thead>
+          <tr>
+            <th>Denomination (₹)</th>
+            <th>Count</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- populated by JS -->
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="footer">
+      <small>Denominations used: 2000, 500, 200, 100, 50, 20, 10, 5, 2, 1</small>
+    </footer>
+  </main>
+
   <script src="script.js"></script>
 </body>
 </html>
